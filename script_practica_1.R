@@ -48,3 +48,21 @@ tabla_frec <- as.data.frame(table(intervalos_salarios)) %>%
 # Ver la tabla final
 tabla_frec
 
+
+# Punto 1:
+# a) Histograma
+hist(base$Salarios, col = "lightblue", main = "Histograma de Salarios", xlab = "Salarios Minimos", ylab = "Frecuencia")
+
+# Graficar histograma a partir de la tabla de frecuencias
+grafica_histograma = barplot(tabla_frec$Frec_Abs, 
+        names.arg = tabla_frec$Intervalo,
+        space = 0,
+        col = "lightblue", 
+        main = "Histograma de Salarios basado en la Tabla de Frecuencias", 
+        xlab = "Salarios Minimos", 
+        ylab = "Frecuencia", 
+        border = "black")
+
+
+
+
