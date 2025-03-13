@@ -49,20 +49,43 @@ tabla_frec <- as.data.frame(table(intervalos_salarios)) %>%
 tabla_frec
 
 
-# Punto 1:
-# a) Histograma
-hist(base$Salarios, col = "lightblue", main = "Histograma de Salarios", xlab = "Salarios Minimos", ylab = "Frecuencia")
+#Gráficos----
+# Graficar histograma de salarios
+hist(base$Salarios, col = "lightblue", main = "Histograma de Salarios", 
+     xlab = "Salarios (Salarios Mínimos)", ylab = "Frecuencia")
 
 # Graficar histograma a partir de la tabla de frecuencias
-grafica_histograma = barplot(tabla_frec$Frec_Abs, 
+barplot(tabla_frec$Frec_Abs, 
         names.arg = tabla_frec$Intervalo,
         space = 0,
         col = "lightblue", 
-        main = "Histograma de Salarios basado en la Tabla de Frecuencias", 
-        xlab = "Salarios Minimos", 
+        main = "Histograma de Salarios basado en Tabla de Frecuencias", 
+        xlab = "Salarios (Intervalos)", 
         ylab = "Frecuencia", 
         border = "black")
 
+# Ojiva (frecuencia acumulada de salarios)
+plot(tabla_frec$Frec_Acum, type = "o", col = "red", 
+     main = "Ojiva de Salarios", 
+     xlab = "Intervalos de Salarios", 
+     ylab = "Frecuencia Acumulada")
+
+#Discreta vs Continua (solo continua, función de densidad)
+# Función de densidad para salarios
+ggplot(base, aes(x = Salarios)) +
+  geom_density(fill = "skyblue", alpha = 0.5, color = "blue") +
+  labs(title = "Función de Densidad de Salarios",
+       x = "Salarios (Salarios Mínimos)",
+       y = "Densidad") +
+  theme_minimal()
+
+# Distribución acumulada (ECDF) para salarios
+dis_ecdf <- ecdf(base$Salarios)  # Función de distribución acumulada empírica
+plot(dis_ecdf, col = "red", 
+     main = "Distribución Acumulada de Salarios", 
+     xlab = "Salarios (Salarios Mínimos)", 
+     ylab = "Frecuencia Acumulada",
+     lwd = 2)
 
 
 
